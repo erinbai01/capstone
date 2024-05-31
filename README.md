@@ -1,4 +1,4 @@
-# store sales prediction
+# Store Sales Prediction
 
 ## Overview
 
