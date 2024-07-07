@@ -4,50 +4,70 @@
 ### Executive Summary
 
 - Favorita is one of the largest supermarket chains in Ecuador, known for its extensive selection of groceries, household items, and other goods. 
-- Given past sales data of different categories and stores, predict future daily sales of each category in different stores.
-- The project aims to help improve customer experience and control business cost.
-- This project focused on fine tuning linear regression. The model is robust but linear regression assumptions are not met so later more advanced models will be used. A simple try on other models showed that Random Forest and Neural Network have the highest R squared scores.
+- Given past sales data of different categories and stores, this project focused on predicting the sales units of the main categories in stores located in the capital city.
+- The business goal is to help improve customer experience and control costs.
+- Three models were applied: Random Forest, Linear Regression, and Decision Tree. Random Forest outperformed the other two models. Manual tuning and GridSearchCV were used for hyperparameter fine-tuning of advanced models. All three models proved to be robust.
 
 
-### Demo
 
-#### EDA and Preprocessing:
+### EDA and Preprocessing:
 
-Define analysis scope
+Define project scope
 
 ![image](./figures/sprint2/SalesUnitByFamily.png)
-![image](./figures/sprint2/SalesUnitByStore.png)
+
+Impute null values
+
 ![image](./figures/sprint2/NullValues.png)
 
 Reduce collinearity
 
 ![image](./figures/sprint2/XsCollinearity.png)
 
-#### Model Evaluation:
+Check target distribution
+
+An earthquake caused GROCERY I's sales units to spike to a record high, resulting in a right-skewed dataset. Sales units over 40k represent only 0.0043% of the data, making it challenging for models to capture these abnormally large sales units.
+
+![image](./figures/sprint3/target%20distr.png)
+
+### Model Performance:
+Compared to LR, DT and RF performed much better across all three scores; however, the extremely large sales units contribute to high MAE and MSE in the advanced models.
+![image](./figures/sprint3/model%20perf.jpg)
+
+### Model Evaluation:
+
+Linear Regression: Residuals show clear pattern, indicating unreliable model.
+
+![image](./figures/sprint3/residual-lr.png)
+
+Linear Regression: Most features have low correlations with the target.
+
+![image](./figures/sprint3/linearity.png)
+
+Decision Tree: Feature importance
+
+![image](./figures/sprint3/dt%20feature%20importance.png)
 
 
-Residual distribution
+Random Forest: Feature importance
 
-![image](./figures/sprint2/QQplot.png)
-
-Homoscedasticity 
-
-![image](./figures/sprint2/Homoscedasticity.png)
-
-
+![image](./figures/sprint3/RF%20feature%20importance.png)
 ### Methodology
 
-- Single Table EDA and Cleaning
-    - Preliminary data cleaning and EDA to understand the dataset to join the five tables together.
-    - In-depth EDA and data cleaning to understand Xs' relationship with y.
-- Joint Table EDA and Feature Engineering:
-  - Full table EDA and preprocessing for data modeling (after joining the tables together, more null values were created and imputation has to be done).
-  - Time series column feature engineering to create features.
-- Baseline Modeling (Linear Regression)
-- PCA and Grid-search Model Fine Tuning
-- Stepwise Model Fine Tuning
+- EDA and Preprocessing
+  - Single Table EDA and Cleaning
+      - Preliminary data cleaning and EDA to understand the dataset to join the five tables together.
+      - In-depth EDA and data cleaning to understand Xs' relationship with y.
+  - Joint Table EDA and Feature Engineering:
+    - Full table EDA and preprocessing for data modeling (after joining the tables together, more null values were created and imputation has to be done).
+    - Time series column feature engineering to create features.
+- Linear Regression
+  - PCA and Grid-search Model Fine Tuning
+  - Stepwise Model Fine Tuning
+- Advanced Model: 
+  - Decision Tree: Mannual fine-tuning, Coarse GridSearchCV Fine-Tuning, Fine GridSearchCV Fine-Tuning
+  - Randomm Forest: To reduce computational cost and achieve a robust model, I manually fine-tuned multiple hyperparameters simultaneously using a for loop and one-fold validation.
 - Model Evaluation
-- Preliminary Modeling of Advanced Models
 
 
 
@@ -96,3 +116,5 @@ greatly affected supermarket sales for several weeks after the earthquake
 
 - https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 - https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html
+- https://scikit-learn.org/stable/modules/tree.html
+- https://scikit-learn.org/stable/modules/ensemble.html
