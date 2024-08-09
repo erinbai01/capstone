@@ -1,11 +1,11 @@
-## FAVORITA STORE SALES PREDICTION
+## STORE SALES PREDICTION
 
 
 ### Executive Summary
 
-- Favorita is one of the largest supermarket chains in Ecuador, known for its extensive selection of groceries, household items, and other goods. 
+- The business is one of the largest supermarket chains in South America, known for its extensive selection of groceries, household items, and other goods. 
 - Given past sales data of different categories and stores, this project focused on predicting the sales units of the main categories in stores located in the capital city.
-- The business goal is to help improve customer experience and control costs.
+- The goal is to help improve customer experience and control costs.
 - Three models were applied: Random Forest, Linear Regression, and Decision Tree. Random Forest outperformed the other two models. Manual tuning and GridSearchCV were used for hyperparameter fine-tuning of advanced models. All three models proved to be robust.
 
 
