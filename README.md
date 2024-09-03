@@ -1,16 +1,15 @@
-## FAVORITA STORE SALES PREDICTION
+## PRODUCT SALES UNITS FORECASTING
 
 
 ### Executive Summary
 
-- Favorita is one of the largest supermarket chains in Ecuador, known for its extensive selection of groceries, household items, and other goods. 
-- Given past sales data of different categories and stores, this project focused on predicting the sales units of the main categories in stores located in the capital city.
-- The business goal is to help improve customer experience and control costs.
-- Three models were applied: Random Forest, Linear Regression, and Decision Tree. Random Forest outperformed the other two models. Manual tuning and GridSearchCV were used for hyperparameter fine-tuning of advanced models. All three models proved to be robust.
+Favorita is one of the largest supermarket chains in Ecuador, renowned for its extensive selection of groceries, household items, and other goods. This project aims to predict the sales volumes of key categories in stores located in the capital city. The business goal is to enhance customer experience and optimize inventory planning.
 
+- Phase One: Exploratory Data Analysis (EDA) and modeling was conducted to identify features crucial for forecasting. Three models were tested: Random Forest, Linear Regression, and Decision Tree. Random Forest emerged as the most effective model.
+- Key Findings: Store transactions were identified as the most important feature for accurately forecasting category sales volumes, with an importance score of 0.35.
+- Phase Two: A Time Series model was applied to predict store transactions. The project combined SARIMAX with Random Forest to forecast category sales units across 17 stores and 5 categories. The resulting model demonstrated robustness, achieving a test R² score of 0.89 and a train score of 0.97.
 
-
-### EDA and Preprocessing:
+### Phase One: Understand the Dataset and Feature Importance:
 
 Define project scope
 
@@ -52,24 +51,47 @@ Decision Tree: Feature importance
 Random Forest: Feature importance
 
 ![image](./figures/sprint3/RF%20feature%20importance.png)
+
+
+### Phase Two: The Most Important Feature (Store Transaction) Forecasting:
+ACF & PACF: Time Series Non-Seasonal Hyperparameter Tuning
+
+![image](./figures/sprint3/acf-pacf.png)
+
+ACF & PACF: Time Series Seasonal Hyperparameter Tuning
+
+![image](./figures/sprint3/seasonal-acf-pacf.png)
+
+SARIMAX: Store Transaction Forecasting
+
+![image](./figures/sprint3/store-trans-forecast.png)
+
+Random Forest: Scalable Forecasting for Multiple Stores and Categories
+
+![image](./figures/sprint3/random-forest-forecast.png)
+
 ### Methodology
 
+Phase One:
 - EDA and Preprocessing
   - Single Table EDA and Cleaning
-      - Preliminary data cleaning and EDA to understand the dataset to join the five tables together.
-      - In-depth EDA and data cleaning to understand Xs' relationship with y.
+      - Conduct preliminary data cleaning and exploratory data analysis (EDA) to understand the dataset and prepare for joining the five tables.
+      - Perform in-depth EDA and data cleaning to understand the relationship between features (Xs) and the target variable (y).
   - Joint Table EDA and Feature Engineering:
-    - Full table EDA and preprocessing for data modeling (after joining the tables together, more null values were created and imputation has to be done).
-    - Time series column feature engineering to create features.
+    - Execute full table EDA and preprocessing for data modeling. Note that joining the tables introduced additional null values that required imputation.
+    - Engineer features from time series columns to enhance the dataset.
 - Linear Regression
-  - PCA and Grid-search Model Fine Tuning
-  - Stepwise Model Fine Tuning
+  - Apply Principal Component Analysis (PCA) and Grid Search for model fine-tuning.
+  - Use stepwise selection for model fine-tuning.
 - Advanced Model: 
-  - Decision Tree: Mannual fine-tuning, Coarse GridSearchCV Fine-Tuning, Fine GridSearchCV Fine-Tuning
-  - Randomm Forest: To reduce computational cost and achieve a robust model, I manually fine-tuned multiple hyperparameters simultaneously using a for loop and one-fold validation.
+  - Decision Tree: Conduct manual fine-tuning, coarse Grid SearchCV fine-tuning, and fine Grid SearchCV fine-tuning.
+  - Random Forest: Reduce computational cost and enhance model robustness by manually fine-tuning multiple hyperparameters simultaneously using a for loop and one-fold validation.
 - Model Evaluation
 
-
+Phase Two:
+- Single Store Transaction Forecast Using SARIMAX
+- 17 Store Transaction Forecasts
+- Use Forecasted Store Transactions as a Key Feature in a Random Forest Model to Predict Category Sales Units at Scale
 
 ### Data Dictionary
 
@@ -118,3 +140,4 @@ greatly affected supermarket sales for several weeks after the earthquake
 - https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html
 - https://scikit-learn.org/stable/modules/tree.html
 - https://scikit-learn.org/stable/modules/ensemble.html
+- https://www.udemy.com/course/time-series-analysis-in-python
